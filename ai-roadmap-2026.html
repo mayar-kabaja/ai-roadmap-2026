@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Roadmap 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8892b0;
+            font-weight: 300;
+        }
+
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 140px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2, #f093fb, #667eea);
+            border-radius: 2px;
+        }
+
+        .stage {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 40px;
+            align-items: start;
+            position: relative;
+        }
+
+        .stage-marker {
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-number {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .stage-number::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .stage-number span {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .stage-0 .stage-number { background: linear-gradient(135deg, #ffd93d, #ff9a3c); }
+        .stage-1 .stage-number { background: linear-gradient(135deg, #6bcb77, #4ecca3); }
+        .stage-2 .stage-number { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .stage-3 .stage-number { background: linear-gradient(135deg, #a66cff, #9c88ff); }
+        .stage-4 .stage-number { background: linear-gradient(135deg, #54a0ff, #5f7fff); }
+
+        .stage-content {
+            padding-left: 40px;
+        }
+
+        .stage-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e6e6e6;
+        }
+
+        .topics-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .topic-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .stage-0 .topic-card::before { background: linear-gradient(90deg, #ffd93d, #ff9a3c); }
+        .stage-1 .topic-card::before { background: linear-gradient(90deg, #6bcb77, #4ecca3); }
+        .stage-2 .topic-card::before { background: linear-gradient(90deg, #ff6b6b, #ee5a5a); }
+        .stage-3 .topic-card::before { background: linear-gradient(90deg, #a66cff, #9c88ff); }
+        .stage-4 .topic-card::before { background: linear-gradient(90deg, #54a0ff, #5f7fff); }
+
+        .topic-main {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .topic-sub {
+            font-size: 0.9rem;
+            color: #8892b0;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .topic-example {
+            font-size: 0.85rem;
+            color: #a0aec0;
+            font-style: italic;
+            background: rgba(255,255,255,0.02);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid rgba(255,255,255,0.1);
+        }
+
+        .category-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .cat-foundation { background: rgba(255, 217, 61, 0.2); color: #ffd93d; }
+        .cat-ml { background: rgba(107, 203, 119, 0.2); color: #6bcb77; }
+        .cat-dl { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .cat-advanced { background: rgba(166, 108, 255, 0.2); color: #a66cff; }
+        .cat-ops { background: rgba(84, 160, 255, 0.2); color: #54a0ff; }
+
+        .connector-dot {
+            position: absolute;
+            left: 133px;
+            top: 50px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+            z-index: 3;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 10%;
+            left: 10%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer p {
+            color: #8892b0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .stage {
+                grid-template-columns: 80px 1fr;
+                gap: 20px;
+            }
+            .roadmap::before {
+                left: 90px;
+            }
+            .connector-dot {
+                left: 83px;
+            }
+            .stage-number {
+                width: 70px;
+                height: 70px;
+            }
+            .stage-content {
+                padding-left: 20px;
+            }
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>AI Roadmap 2026</h1>
+            <p class="subtitle">Your Complete Learning Path to Artificial Intelligence Mastery</p>
+        </div>
+
+        <div class="roadmap">
+            <!-- Stage 0 -->
+            <div class="stage stage-0">
+                <div class="stage-marker">
+                    <div class="stage-number">
+                        STAGE
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="connector-dot"></div>
+                <div class="stage-content">
+                    <h2 class="stage-title">📐 Foundations</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <span class="category-label cat-foundation">Programming</span>
+                            <div class="topic-main">Python Programming</div>
+                            <div class="topic-sub">The primary language for AI and machine learning. Learn variables, functions, loops, and object-oriented programming.</div>
+                            <div class="topic-example">💡 Example: Write scripts to automate tasks, manipulate data with pandas, and create simple programs</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-foundation">Mathematics</span>
+                            <div class="topic-main">Data Structures</div>
+                            <div class="topic-sub">How computers organize and store data efficiently. Arrays hold lists, trees organize hierarchies, graphs connect relationships.</div>
+                            <div class="topic-example">💡 Example: Use arrays to store customer data, trees to build decision systems, graphs to map social networks</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-foundation">Mathematics</span>
+                            <div class="topic-main">Algorithms</div>
+                            <div class="topic-sub">Step-by-step procedures to solve problems. Learn how to sort data, search efficiently, and optimize solutions.</div>
+                            <div class="topic-example">💡 Example: Sort product prices from low to high, search through millions of records in seconds</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 1 -->
+            <div class="stage stage-1">
+                <div class="stage-marker">
+                    <div class="stage-number">
+                        STAGE
+                        <span>1</span>
+                    </div>
+                </div>
+                <div class="connector-dot"></div>
+                <div class="stage-content">
+                    <h2 class="stage-title">🤖 Machine Learning</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <span class="category-label cat-ml">Core ML</span>
+                            <div class="topic-main">Supervised Learning</div>
+                            <div class="topic-sub">Teaching computers with labeled examples. Classification sorts things into categories (spam/not spam). Regression predicts numbers (house prices).</div>
+                            <div class="topic-example">💡 Example: Train a model to detect spam emails or predict tomorrow's temperature based on historical data</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ml">Core ML</span>
+                            <div class="topic-main">Unsupervised Learning</div>
+                            <div class="topic-sub">Finding patterns without labels. Clustering groups similar items together. Dimensionality reduction simplifies complex data.</div>
+                            <div class="topic-example">💡 Example: Group customers by shopping habits, compress images without losing quality, find similar products</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ml">Core ML</span>
+                            <div class="topic-main">ML Fundamentals</div>
+                            <div class="topic-sub">Core concepts like training models, evaluating accuracy, preventing overfitting, and choosing the right algorithm for your problem.</div>
+                            <div class="topic-example">💡 Example: Split data into training/testing sets, measure model accuracy, tune parameters for better results</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="stage stage-2">
+                <div class="stage-marker">
+                    <div class="stage-number">
+                        STAGE
+                        <span>2</span>
+                    </div>
+                </div>
+                <div class="connector-dot"></div>
+                <div class="stage-content">
+                    <h2 class="stage-title">🧠 Deep Learning</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <span class="category-label cat-dl">Neural Nets</span>
+                            <div class="topic-main">Neural Networks</div>
+                            <div class="topic-sub">Inspired by the human brain. Perceptrons are simple units, MLPs are layers of neurons, backpropagation is how networks learn from mistakes.</div>
+                            <div class="topic-example">💡 Example: Recognize handwritten digits, predict customer churn, classify images of cats vs dogs</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-dl">Architectures</span>
+                            <div class="topic-main">CNN, RNN, LSTM</div>
+                            <div class="topic-sub">CNNs excel at images (recognize faces). RNNs handle sequences (text, time series). LSTMs remember long-term patterns.</div>
+                            <div class="topic-example">💡 Example: CNN detects objects in photos, RNN predicts next word in a sentence, LSTM forecasts stock prices</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-dl">Frameworks</span>
+                            <div class="topic-main">PyTorch / TensorFlow</div>
+                            <div class="topic-sub">Professional tools for building deep learning models. PyTorch is popular in research, TensorFlow is widely used in production.</div>
+                            <div class="topic-example">💡 Example: Build a face recognition system, create a recommendation engine, train models on GPUs for speed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="stage stage-3">
+                <div class="stage-marker">
+                    <div class="stage-number">
+                        STAGE
+                        <span>3</span>
+                    </div>
+                </div>
+                <div class="connector-dot"></div>
+                <div class="stage-content">
+                    <h2 class="stage-title">🚀 Advanced AI</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <span class="category-label cat-advanced">NLP</span>
+                            <div class="topic-main">Large Language Models</div>
+                            <div class="topic-sub">AI that understands and generates human language. Transformers are the architecture behind ChatGPT, Claude, and GPT-4.</div>
+                            <div class="topic-example">💡 Example: ChatGPT writes essays, translates languages, answers questions, generates code</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-advanced">NLP</span>
+                            <div class="topic-main">RAG Engines</div>
+                            <div class="topic-sub">Retrieval Augmented Generation combines AI with your own data. The AI searches your documents first, then generates accurate answers.</div>
+                            <div class="topic-example">💡 Example: Build a chatbot that answers questions about your company's policies using your internal documents</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-advanced">NLP</span>
+                            <div class="topic-main">Chatbots</div>
+                            <div class="topic-sub">Conversational AI that can have natural dialogues with users. Handle customer support, booking, and information retrieval.</div>
+                            <div class="topic-example">💡 Example: Customer service bot that handles refunds, booking assistant that schedules appointments</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-advanced">Vision</span>
+                            <div class="topic-main">Computer Vision</div>
+                            <div class="topic-sub">Teaching computers to "see" and understand images and videos. YOLO detects objects in real-time, OpenCV processes images.</div>
+                            <div class="topic-example">💡 Example: Self-driving cars detect pedestrians, security cameras identify intruders, apps identify plants from photos</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-advanced">Multimodal</span>
+                            <div class="topic-main">Vision Language Models</div>
+                            <div class="topic-sub">AI that understands both images and text together. Can describe photos, answer questions about images, generate images from text.</div>
+                            <div class="topic-example">💡 Example: GPT-4 Vision analyzes medical scans, DALL-E creates images from descriptions, AI describes what's in photos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="stage stage-4">
+                <div class="stage-marker">
+                    <div class="stage-number">
+                        STAGE
+                        <span>4</span>
+                    </div>
+                </div>
+                <div class="connector-dot"></div>
+                <div class="stage-content">
+                    <h2 class="stage-title">⚙️ MLOps & Deployment</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <span class="category-label cat-ops">DevOps</span>
+                            <div class="topic-main">MLOps</div>
+                            <div class="topic-sub">Managing ML models in production. Version control for models, monitoring performance, retraining when accuracy drops, tracking experiments.</div>
+                            <div class="topic-example">💡 Example: Track which model version performs best, automatically retrain when data changes, monitor accuracy in production</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ops">Container</span>
+                            <div class="topic-main">Docker</div>
+                            <div class="topic-sub">Package your AI model with all dependencies into a container. Ensures your model runs the same way everywhere - on your laptop or in the cloud.</div>
+                            <div class="topic-example">💡 Example: Deploy your chatbot to any server without "it works on my machine" problems</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ops">Automation</span>
+                            <div class="topic-main">CI/CD</div>
+                            <div class="topic-sub">Continuous Integration and Deployment. Automatically test your model, retrain it, and deploy updates without manual work.</div>
+                            <div class="topic-example">💡 Example: Every time you update your model code, it automatically tests and deploys the new version</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ops">Data</span>
+                            <div class="topic-main">Data Pipelines</div>
+                            <div class="topic-sub">ETL (Extract, Transform, Load) - automatically collect data from sources, clean it, transform it, and load it where your models need it.</div>
+                            <div class="topic-example">💡 Example: Daily pipeline that collects user data, cleans it, and updates your recommendation model</div>
+                        </div>
+                        <div class="topic-card">
+                            <span class="category-label cat-ops">Cloud</span>
+                            <div class="topic-main">AWS Cloud Services</div>
+                            <div class="topic-sub">Deploy AI at scale using cloud infrastructure. Use powerful GPUs for training, auto-scale based on traffic, store massive datasets.</div>
+                            <div class="topic-example">💡 Example: Train models on AWS with powerful GPUs, serve predictions to millions of users, store terabytes of data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 Start from Stage 0 and progress systematically • Each stage builds upon the previous • Practice with real projects at every stage</p>
+        </div>
+    </div>
+</body>
+</html>
